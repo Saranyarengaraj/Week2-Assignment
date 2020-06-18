@@ -1,0 +1,36 @@
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class editlead {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "./drivers/Chromedriver/chromedriver.exe");
+		ChromeDriver driver = new ChromeDriver();
+		driver.get("http://leaftaps.com/opentaps");
+		driver.manage().window().maximize();
+		WebElement eUsername = driver.findElementById("username");
+		eUsername.sendKeys("Demosalesmanager");
+		WebElement ePassword = driver.findElementById("password");
+		ePassword.sendKeys("crmsfa");
+		driver.findElementByClassName("decorativeSubmit").click();
+		driver.findElementByLinkText("CRM/SFA").click();
+		driver.findElementByLinkText("Leads").click();
+		driver.findElementByLinkText("Find Leads").click();
+		driver.findElementByXPath("(//input[@name='companyName'])[2]").sendKeys("JPMC");
+		driver.findElementByXPath("//button[text()=\"Find Leads\"]").click();
+		Thread.sleep(3000);
+		driver.findElementByXPath("//div[@class='x-grid3-cell-inner x-grid3-col-partyId']/a").click();
+		driver.findElementByXPath("//a[text()='Edit']").click();
+		String cname = driver.findElementById("updateLeadForm_companyName").getAttribute("value");
+		System.out.println(cname);
+		driver.findElementByXPath("//input[@id='updateLeadForm_companyName']").clear();
+		driver.findElementByXPath("//input[@id='updateLeadForm_companyName']").sendKeys("NewTestleaf5");
+		driver.findElementByXPath("//input[@value='Update']").click();
+
+		String text2=driver.findElementByXPath("//span[@id='viewLead_companyName_sp']").getText();
+		System.out.println("Updated Company Name:" + text2);
+		driver.close();
+		
+			}
+
+}
