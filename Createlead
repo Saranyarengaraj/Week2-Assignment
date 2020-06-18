@@ -1,0 +1,56 @@
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class createlead {
+
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver", "./drivers/Chromedriver/chromedriver.exe");
+		ChromeDriver driver = new ChromeDriver();
+		driver.get("http://leaftaps.com/opentaps");
+		driver.manage().window().maximize();
+		WebElement eUsername = driver.findElementById("username");
+		eUsername.sendKeys("Demosalesmanager");
+		WebElement ePassword = driver.findElementById("password");
+		ePassword.sendKeys("crmsfa");
+		driver.findElementByClassName("decorativeSubmit").click();
+		driver.findElementByLinkText("CRM/SFA").click();
+		driver.findElementByLinkText("Leads").click();
+		driver.findElementByLinkText("Create Lead").click();
+		driver.findElementByXPath("//input[@id='createLeadForm_companyName']").sendKeys("JPMC");
+		driver.findElementByXPath("//input[@id='createLeadForm_firstName']").sendKeys("Seyon");
+		driver.findElementByXPath("//input[@id='createLeadForm_lastName']").sendKeys("Sakti");
+	    
+	    Select eleSource = new Select(driver.findElementByName("dataSourceId"));
+	    eleSource.selectByValue("LEAD_EMPLOYEE");
+	    driver.findElementById("createLeadForm_annualRevenue").sendKeys("324000");
+	    
+	    Select eleIndustry = new Select(driver.findElementByName("industryEnumId"));
+	    eleIndustry.selectByValue("IND_SOFTWARE");
+	    
+	    
+	    Select eOwnership = new Select(driver.findElementByName("ownershipEnumId"));
+	    eOwnership.selectByVisibleText("S-Corporation");
+	    
+	    driver.findElementById("createLeadForm_description").sendKeys("Selenium Automation Tester");
+	    
+		Select eleMarketing = new Select(driver.findElementById("createLeadForm_marketingCampaignId"));
+		eleMarketing.selectByIndex(6);
+		
+		driver.findElementById("createLeadForm_primaryEmail").sendKeys("sara.asd@gmail.com");
+		driver.findElementById("createLeadForm_primaryPhoneNumber").sendKeys("9898954345");
+		driver.findElementByXPath("//input[@name = 'submitButton']").click();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+	}
+
+}
