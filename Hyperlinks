@@ -1,0 +1,34 @@
+package training.assignment;
+
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class hyperlinks {
+
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver", "./drivers/Chromedriver/chromedriver.exe");
+		ChromeDriver driver = new ChromeDriver();
+		driver.get("http://leafground.com/pages/Link.html");
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
+
+		// Go to Home Page
+		System.out.println("The home page is : " + driver.getCurrentUrl());
+
+		// Find where am supposed to go without clicking me?
+		System.out.println(
+				driver.findElementByLinkText("Find where am supposed to go without clicking me?").getAttribute("href"));
+
+		// How many links are available in this page?
+		System.out.println(driver.findElementByLinkText("How many links are available in this page?").getAttribute("href"));
+
+		// Verify am I broken?
+		String verify = driver.findElementByLinkText("Verify am I broken?").getAttribute("href");
+		if (verify.contains("error")) {
+			System.out.println("Link is broken");
+		} else {
+			System.out.println("Link is not broken");
+		}
+		driver.close();
+	}
+}
