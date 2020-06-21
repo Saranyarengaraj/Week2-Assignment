@@ -1,0 +1,27 @@
+package training.assignment;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class button {
+
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver", "./drivers/Chromedriver/chromedriver.exe");
+		ChromeDriver driver = new ChromeDriver();
+		driver.get("http://leafground.com/pages/Button.html");
+		driver.manage().window().maximize();
+
+		System.out.println("The URL is : " + driver.getCurrentUrl());
+
+		// Find position of button (x,y)
+		System.out.println("The X and Y position is : " + driver.findElementById("position").getLocation());
+
+		// Find button color
+		System.out.println("Button color is : " + driver.findElementById("color").getCssValue("background-color"));
+
+		// Find the height and width
+		System.out.println("The height and width is : " + driver.findElementById("size").getSize());
+
+		driver.close();
+	}
+
+}
