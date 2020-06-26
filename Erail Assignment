@@ -1,0 +1,53 @@
+package training.assignment;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class listset {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+		System.setProperty("webdriver.chrome.driver", "./drivers/Chromedriver/chromedriver.exe");
+		ChromeDriver driver = new ChromeDriver();
+		driver.get("https://erail.in");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		driver.findElementById("chkSelectDateOnly").click();
+		driver.findElementById("txtStationFrom").clear();
+		driver.findElementById("txtStationFrom").sendKeys("Chennai Park", Keys.ENTER);
+		driver.findElementById("txtStationTo").clear();
+		driver.findElementById("txtStationTo").sendKeys("Bangalore East", Keys.ENTER);
+		Thread.sleep(2000);
+		
+		List<WebElement> trainList = driver.findElementsByXPath("//table[@class='DataTable TrainList TrainListHeader']//tr/td[2]/a");
+		int trainListSize = trainList.size(); 
+		System.out.println("The Size of the Train Name list = " + trainListSize); 
+		
+		Set<WebElement> trainSet = new HashSet<WebElement>();
+		for(int i=0;i<trainListSize;i++){
+			trainSet.add(trainList.get(i));			
+		}
+		int trainSetSize = trainSet.size();
+		System.out.println("The Size of the Train Name set = " + trainSetSize);
+		
+		if(trainListSize == trainSetSize){ //comparing the sizes of list and set
+			System.out.println("The Names are unique");
+		}
+		else{
+			System.out.println("The Names are distinct");
+		}
+		Thread.sleep(3000);
+		driver.close();
+		
+		
+		
+		
+	}
+
+}
